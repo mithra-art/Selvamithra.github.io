@@ -4,153 +4,475 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selvamithra | ECE Portfolio</title>
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Selvamithra's ECE portfolio showcasing programming skills, engineering projects, certifications and internship training.">
+  <title>Selvamithra M | ECE Portfolio</title>
+
   <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #131b30;
+      --border: #29344d;
+      --text: #eef2ff;
+      --muted: #aab5ce;
+      --purple: #b19aff;
+      --cyan: #70e4ed;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     html { scroll-behavior: smooth; }
+
     body {
-      background: #0b1020;
-      color: #eef2ff;
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.75;
     }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { color: white; }
+
+    .container { width: min(1080px, 88%); margin: auto; }
+
     header {
-      padding: 20px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      border-bottom: 1px solid #283149;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,16,32,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    .logo { color: #a78bfa; font-size: 24px; font-weight: bold; }
-    nav { display: flex; flex-wrap: wrap; gap: 16px; }
-    a { color: #c4b5fd; text-decoration: none; }
-    nav a { color: #eef2ff; font-size: 14px; }
-    a:hover { color: #67e8f9; }
-    section { padding: 65px 8%; scroll-margin-top: 20px; }
-    .hero { min-height: 70vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: flex-start; }
-    .tag { color: #67e8f9; letter-spacing: 2px; font-size: 13px; }
-    h1 { font-size: clamp(38px, 7vw, 65px); line-height: 1.2; margin: 14px 0; }
-    h1 span, h2 span { color: #a78bfa; }
-    h2 { font-size: 30px; margin-bottom: 20px; }
-    p { color: #b8c0d9; max-width: 750px; }
-    .btn { display: inline-block; padding: 11px 20px; margin: 20px 10px 0 0;
-      background: #8b5cf6; border-radius: 8px; color: white; }
-    .outline { background: transparent; border: 1px solid #8b5cf6; }
-    .chips, .projects { display: flex; flex-wrap: wrap; gap: 15px; }
-    .chip, .card { background: #141b30; border: 1px solid #29314b;
-      border-radius: 12px; padding: 18px; }
-    .chip { color: #c4b5fd; }
-    .card { flex: 1 1 230px; }
-    .card h3 { margin-bottom: 8px; }
-    .muted { color: #8792b0; font-size: 14px; margin-top: 10px; }
-    footer { text-align: center; padding: 25px; border-top: 1px solid #283149;
-      color: #8792b0; }
-    @media (max-width: 600px) {
-      header { padding: 18px 5%; }
-      section { padding: 45px 6%; }
-      nav { gap: 10px; }
+
+    .navbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo { font-size: 24px; font-weight: 800; color: var(--purple); }
+
+    nav { display: flex; flex-wrap: wrap; gap: 18px; }
+    nav a { color: var(--muted); font-size: 13px; }
+    nav a:hover { color: var(--cyan); }
+
+    section { padding: 78px 0; scroll-margin-top: 65px; }
+
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 85% 30%, #44316b33, transparent 42%),
+        radial-gradient(ellipse at 10% 80%, #176d7a18, transparent 38%);
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin: 18px 0;
+    }
+
+    h1 span, h2 span { color: var(--purple); }
+
+    h2 { font-size: clamp(27px, 4vw, 36px); margin-bottom: 12px; }
+
+    .subtitle { font-size: clamp(18px, 3vw, 23px); color: var(--muted); }
+    .intro { max-width: 680px; color: var(--muted); margin-top: 18px; }
+    .section-intro { color: var(--muted); max-width: 720px; margin-bottom: 28px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 19px;
+      border-radius: 8px;
+      background: var(--purple);
+      color: #111326;
+      font-weight: 700;
+      border: 1px solid var(--purple);
+      transition: transform .2s, background .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: #c6b7ff; color: #111326; }
+
+    .btn.secondary { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .section-label { color: var(--cyan); font-size: 12px; letter-spacing: 2px; font-weight: 700; }
+    .section-heading { margin-bottom: 26px; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+    }
+
+    .about-grid, .skills-grid, .project-grid, .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .about-grid p { color: var(--muted); }
+
+    .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .panel h3 { font-size: 18px; margin-bottom: 12px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+
+    .tag {
+      border: 1px solid #3b4161;
+      background: #1b2340;
+      color: #d7d0ff;
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .item-type {
+      color: var(--cyan);
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .project-grid .panel, .learning-grid .panel {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .project-grid .panel p, .learning-grid .panel p {
+      color: var(--muted);
+    }
+
+    .project-grid .tags { margin-bottom: 12px; }
+
+    .note { font-size: 13px; color: var(--muted); margin-top: 20px; }
+
+    .resume-panel {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      background: linear-gradient(120deg, #1b2340, #17172f);
+    }
+
+    .resume-panel p { color: var(--muted); max-width: 600px; }
+
+    .contact-grid { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 24px; }
+
+    .contact-link {
+      display: block;
+      padding: 13px 16px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .navbar { padding: 15px 0; align-items: flex-start; flex-direction: column; }
+      nav { gap: 12px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .about-grid, .project-grid, .learning-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
+      .hero { min-height: 70vh; }
     }
   </style>
 </head>
+
 <body>
   <header>
-    <div class="logo">SM.</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#certificates">Certificates</a>
-      <a href="#resume">Resume</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="container navbar">
+      <a class="logo" href="#home">SM.</a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#learning">Certifications</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="tag">ECE STUDENT | FUTURE ENGINEER</div>
-    <h1>Hi, I'm <span>Selvamithra.</span></h1>
-    <h2>Learning Today. Building Tomorrow.</h2>
-    <p>I am a second-year Electronics and Communication Engineering
-      student passionate about programming, technology, and problem-solving.
-      I enjoy learning new concepts and applying my knowledge through
-      practical projects.</p>
-    <div>
-      <a class="btn" href="#projects">Explore My Projects ↗</a>
-      <a class="btn outline" href="#contact">Let's Connect</a>
-    </div>
-  </section>
-
-  <section id="about">
-    <h2>About <span>Me</span></h2>
-    <p>I am currently pursuing my degree in Electronics and Communication
-      Engineering. Along with my core engineering subjects, I am developing
-      my programming skills in C, Python, and Java. I am focused on improving
-      my technical abilities, communication, and problem-solving skills
-      as I prepare for future placement opportunities.</p>
-  </section>
-
-  <section id="skills">
-    <h2>Technical <span>Skills</span></h2>
-    <p>Programming languages and professional skills I am developing.</p>
-    <div class="chips" style="margin-top:20px">
-      <div class="chip">C Programming</div>
-      <div class="chip">Python</div>
-      <div class="chip">Java</div>
-      <div class="chip">Problem Solving</div>
-      <div class="chip">Teamwork</div>
-      <div class="chip">Communication</div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2>My <span>Projects</span></h2>
-    <div class="projects">
-      <div class="card">
-        <h3>SmartMove</h3>
-        <p>A smart public transportation concept designed to provide
-          bus location and travel updates to passengers.</p>
-        <p class="muted">Academic Project</p>
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="eyebrow">Electronics & Communication Engineering</div>
+        <h1>Hello, I'm<br><span>Selvamithra M.</span></h1>
+        <div class="subtitle">ECE Student | Aspiring Engineer</div>
+        <p class="intro">
+          Exploring the intersection of electronics, programming and emerging
+          technologies, with a focus on continuous learning and practical
+          problem-solving.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#projects">Explore My Work ↗</a>
+          <a class="btn secondary" href="#contact">Get in Touch</a>
+        </div>
       </div>
-      <div class="card">
-        <h3>Programming Practice</h3>
-        <p>A collection of programming exercises and problem-solving
-          practice using C, Python, and Java.</p>
-        <p class="muted">Learning Journey</p>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">A LITTLE ABOUT ME</div>
+          <h2>About <span>Me</span></h2>
+        </div>
+        <div class="about-grid">
+          <div class="panel">
+            <p>
+              I am a second-year Electronics and Communication Engineering
+              student building a strong foundation in programming and core
+              engineering concepts. With exposure to C, Python and Java, I am
+              interested in understanding how technology works and how it can
+              be applied to solve practical problems.
+            </p>
+            <p style="margin-top:14px">
+              I value consistent learning, analytical thinking and
+              collaboration. My goal is to strengthen my technical abilities
+              through hands-on projects and training while preparing for
+              internship and placement opportunities.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>My Current Focus</h3>
+            <p>Building programming confidence and problem-solving skills.</p>
+            <p style="margin-top:12px">Connecting electronics concepts with real-world applications.</p>
+            <p style="margin-top:12px">Learning through projects, courses and practical training.</p>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">WHAT I BRING</div>
+          <h2>My <span>Skills</span></h2>
+          <p class="section-intro">
+            A growing skill set across programming, professional development
+            and electronics-related interests.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="panel">
+            <h3>Technical Skills</h3>
+            <div class="tags">
+              <span class="tag">C Programming</span>
+              <span class="tag">Python</span>
+              <span class="tag">Java</span>
+              <span class="tag">Programming Fundamentals</span>
+              <span class="tag">Problem Solving</span>
+              <span class="tag">Basic Electronics</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Soft Skills</h3>
+            <div class="tags">
+              <span class="tag">Communication</span>
+              <span class="tag">Teamwork</span>
+              <span class="tag">Adaptability</span>
+              <span class="tag">Time Management</span>
+              <span class="tag">Willingness to Learn</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Areas of Interest</h3>
+            <div class="tags">
+              <span class="tag">Internet of Things</span>
+              <span class="tag">Embedded Systems</span>
+              <span class="tag">Artificial Intelligence</span>
+              <span class="tag">Cybersecurity</span>
+              <span class="tag">Software Development</span>
+              <span class="tag">Communication Systems</span>
+            </div>
+          </div>
+        </div>
+        <p class="note">Skills listed reflect areas to showcase; keep only those you can confidently discuss in an interview.</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">LEARNING BY DOING</div>
+          <h2>Selected <span>Projects</span></h2>
+          <p class="section-intro">
+            Core engineering and programming project ideas that can demonstrate
+            practical skills as you develop them.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <div class="panel">
+            <div class="item-type">Core ECE · Beginner</div>
+            <h3 style="margin-top:10px">LDR-Based Automatic Street Light</h3>
+            <p>
+              A light-sensing circuit concept that uses a Light Dependent
+              Resistor to detect ambient brightness and control an LED or lamp.
+              It introduces sensor behaviour, basic circuits and automation.
+            </p>
+            <div class="tags">
+              <span class="tag">LDR Sensor</span>
+              <span class="tag">Basic Electronics</span>
+              <span class="tag">Automation</span>
+            </div>
+            <p class="note">Suggested project — add your circuit, code or results after implementation.</p>
+          </div>
+
+          <div class="panel">
+            <div class="item-type">ECE + Programming · Intermediate</div>
+            <h3 style="margin-top:10px">SmartMove: Bus Tracking Concept</h3>
+            <p>
+              A public transport solution concept for sharing bus locations
+              and arrival updates. The proposed system combines GPS data,
+              a software interface and passenger-focused information.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">GPS / IoT Concepts</span>
+              <span class="tag">System Design</span>
+            </div>
+            <p class="note">Academic concept — describe your actual contribution and implementation status accurately.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">CONTINUOUS LEARNING</div>
+          <h2>Certifications & <span>Training</span></h2>
+          <p class="section-intro">
+            Courses and practical learning experiences that support my
+            development across software and emerging technologies.
+          </p>
+        </div>
+
+        <div class="learning-grid">
+          <div class="panel">
+            <div class="item-type">Certification</div>
+            <h3 style="margin-top:10px">Internet of Things (IoT)</h3>
+            <p>Introductory learning in connected devices and IoT concepts.</p>
+          </div>
+          <div class="panel">
+            <div class="item-type">Certification</div>
+            <h3 style="margin-top:10px">Cybersecurity</h3>
+            <p>Coursework covering cybersecurity fundamentals and digital safety.</p>
+          </div>
+          <div class="panel">
+            <div class="item-type">Certification</div>
+            <h3 style="margin-top:10px">Artificial Intelligence</h3>
+            <p>Introductory learning about AI concepts and applications.</p>
+          </div>
+          <div class="panel">
+            <div class="item-type">Certification</div>
+            <h3 style="margin-top:10px">Python Programming</h3>
+            <p>Programming concepts and practical Python learning.</p>
+          </div>
+          <div class="panel">
+            <div class="item-type">Practical Training</div>
+            <h3 style="margin-top:10px">20-Day Internship Training</h3>
+            <p>
+              Completed a 20-day internship training experience.
+              Add the organisation, training domain and key learning outcomes
+              to give recruiters a clearer picture.
+            </p>
+          </div>
+        </div>
+        <p class="note">
+          Add certificate links or issuing organisations when available.
+          Include only courses you have completed and training details you can verify.
+        </p>
+      </div>
+    </section>
+
+    <section id="resume">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">MY PROFESSIONAL PROFILE</div>
+          <h2>Resume & <span>Background</span></h2>
+        </div>
+        <div class="panel resume-panel">
+          <div>
+            <h3>Interested in my profile?</h3>
+            <p>
+              View my resume for a concise overview of my education,
+              technical skills, training and project experience.
+            </p>
+          </div>
+          <a class="btn" href="https://drive.google.com/file/d/1Hevdg-25X4DrWr1kDGWSNhIhIGqMRAZ3/view"
+             target="_blank" rel="noopener noreferrer">
+            View My Resume ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">LET'S CONNECT</div>
+          <h2>Contact <span>Me</span></h2>
+          <p class="section-intro">
+            I welcome opportunities to learn, collaborate and connect with
+            people working across engineering and technology.
+          </p>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-link" href="mailto:selvamithra725@gmail.com">
+            ✉ Email Me
+          </a>
+          <a class="contact-link"
+             href="https://www.linkedin.com/in/selvamithra-m-938376427/"
+             target="_blank" rel="noopener noreferrer">
+            LinkedIn ↗
+          </a>
+          <a class="contact-link"
+             href="https://github.com/mithra-art"
+             target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Selvamithra M. | Built with curiosity and a commitment to learning.
     </div>
-    <p class="muted">Add project details and links as your work progresses.</p>
-  </section>
-
-  <section id="certificates">
-    <h2>Certificates & <span>Achievements</span></h2>
-    <div class="card">
-      <p>Your completed courses, technical certificates, workshops,
-        and achievements will be showcased here.</p>
-      <p class="muted">Add only certificates you have actually earned.</p>
-    </div>
-  </section>
-
-  <section id="resume">
-    <h2>My <span>Resume</span></h2>
-    <p>Interested in my educational background, technical skills,
-      and projects? My resume will be available here.</p>
-    <p class="muted">Upload your resume PDF to this repository to add
-      a downloadable resume link.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Let's <span>Connect</span></h2>
-    <p>I am always interested in learning, collaborating on projects,
-      and connecting with people who share an interest in technology.</p>
-    <p style="margin-top:15px">
-      GitHub: <a href="https://github.com/mithra-art">Visit My GitHub ↗</a>
-    </p>
-    <p style="margin-top:8px">Email: Add your professional email</p>
-    <p style="margin-top:8px">LinkedIn: Add your LinkedIn profile</p>
-  </section>
-
-  <footer>© 2026 Selvamithra | Personal Portfolio</footer>
+  </footer>
 </body>
 </html>
